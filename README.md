@@ -1,8 +1,10 @@
 # RESTful APIs для modx revolution
 Готовые конгтроллеры для работы с товарами, категориями minishop2 а так же с обычными ресурсами
 
-Для начала работы необходимол скопировать папку **rest** в корневую директорию и прописать в nginx следующий код
+Для начала работы необходимо скопировать папку **rest** в корневую директорию и прописать следующие:
 
+
+#### для NGINX
 ```
 server {
     ...........
@@ -20,6 +22,17 @@ server {
 После чего перезапустить веб-сервер
 ```
 service nginx restart
+```
+
+
+#### Для Apache
+```
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-s
+RewriteRule ^(.*)$ rest/index.php?_rest=$1 [QSA,NC,L]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*)$ rest/index.php [QSA,NC,L]
 ```
 
 ## Опубликованные методы
